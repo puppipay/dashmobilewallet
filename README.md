@@ -1,7 +1,7 @@
 # Create your own DASH wallet in Ionic 4
 
 
-## Video 
+## Video of DASH wallet
 
 [![Working of DASH wallet](https://img.youtube.com/vi/Wj8mJYc0Nlc/0.jpg)](https://www.youtube.com/watch?v=Wj8mJYc0Nlc "Working of DASH wallet")
 
@@ -145,12 +145,12 @@ import { HttpModule } from '@angular/http';
 
 - Copy dashcore library to appropriate place
 
-Copy dashcore-lib.min.js  to  dist/dashcore-lib.min.js
+Copy dashcore-lib.min.js  to  assets/dist/dashcore-lib.min.js
 
 In index.html add
 
 ``` bash
- <script src='dist/dashcore-lib.min.js' type="text/javascript"></script>
+ <script src='assets/dist/dashcore-lib.min.js' type="text/javascript"></script>
 
 
 ```
