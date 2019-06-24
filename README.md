@@ -1,6 +1,15 @@
 # Create your own DASH wallet in Ionic 4
 
-- Video to be added
+
+## Video 
+
+[![Working of DASH wallet](https://img.youtube.com/vi/Wj8mJYc0Nlc/0.jpg)](https://www.youtube.com/watch?v=Wj8mJYc0Nlc "Working of DASH wallet")
+
+
+## Source of the DASH wallet 
+
+ https://github.com/puppipay/workingdashwallet/
+
 
 ## Introduction - Blockchain, Bitcoin, DASH
 
@@ -68,14 +77,41 @@ Note:- If you try doing "npm install @dashevo/dashcore-lib" and include in mobil
 ## Setup ionic tabs app
 
 - First time ionic users only
+
 If you are using ionic for first time, refer this link to setup Ionic environment
+
 https://ionicframework.com/docs/installation/cli
 
-Run "npm install -g ionic"
+Run command
+
+npm install -g ionic
 
 - Create dashwallet tabs app
 
 Run "ionic start dashwallet tabs"
+
+ npm install @ionic/storage --save
+
+- Add storage and http module to ionic application
+
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpModule } from '@angular/http';
+
+- Add import entry for ionic application
+
+ HttpModule,
+ IonicStorageModule.forRoot(),
+
+
+- Copy dashcore library to appropriate place
+
+Copy dashcore-lib.min.js  to  dist/dashcore-lib.min.js
+
+In index.html add
+
+ <script src='dist/dashcore-lib.min.js' type="text/javascript"></script>
+
+
 
 
 
@@ -84,7 +120,7 @@ Run "ionic start dashwallet tabs"
 It has 3 tabs,
 
 - Wallet (send and receive)
-- Transactions
+- Transactions (see sent transaction)
 - Settings (wallet create, set wallet)
 
 ## Get some DASH testcoins
@@ -109,6 +145,10 @@ https://testnet-insight.dashevo.org/insight-api/addr/92wN1HFM2qmarbxwN25EeeTC4ii
 ```
 
 ## Test by sending/receiving
+
+- See the video of sending DASH.
+
+- For receiving DASH into your wallet, provide the "wallet-address" to the other sending application.
 
 ## Assorted ionic code snippets
 
@@ -151,9 +191,8 @@ loadwalletwif() {
 
 ```
 
-- Read wallet address
 
-## Assorted DASH code snippets needed
+## Assorted DASH code snippets used
 
 - Create wallet WIF
 
@@ -176,7 +215,7 @@ loadwalletwif() {
 
 ```
 
-- Do Transaction 
+- Perform DASH Transaction 
 
 ``` bash
   var tx = new dashcore.Transaction()
@@ -191,37 +230,46 @@ loadwalletwif() {
 
 ## Understanding DASH libraries 
 
-- Look at the organization 
+- Look at the organization of DASH library
 
-https://github.com/dashevo/dashcore-lib/blob/master/index.js
+-- https://github.com/dashevo/dashcore-lib/blob/master/index.js
 
 - See how to access PrivateKey
 
 Observe Privatekey library is exported as below
 
+``` bash
 bitcore.PrivateKey = require('./lib/privatekey');
+```
 
 So when PrivateKey functionality has to be accessed, it is done as below
 
+``` bash
 dashcore.PrivateKey.fromWIF(...)
+```
 
 - See how to access Transaction
 
 Observe Transaction library is exported as below
 
+``` bash
 bitcore.Transaction = require('./lib/transaction');
 
+```
 Similarly Transaction is accessed as
+
+``` bash
 
 var tx = new dashcore.Transaction()...
 
+```
 
 
 ## REST api to query DASH blockchain
 
 - Example to get balance in DASH address
 
-Refer: source provided
+Refer: source provided https://github.com/puppipay/workingdashwallet/blob/master/src/app/providers/puppipay.dash.service.ts
 
 ``` bash
 getBalance(address: string, network: string): any {
@@ -254,7 +302,7 @@ getBalance(address: string, network: string): any {
 
 - Example to get utxo
 
-Refer: source provided
+Refer: source provided https://github.com/puppipay/workingdashwallet/blob/master/src/app/providers/puppipay.dash.service.ts
 
 ``` bash
   getUtxo(address: string, network: string): any {
@@ -288,7 +336,7 @@ Refer: source provided
 
 - Example to build transaction
 
-Refer: source provided
+Refer: source provided https://github.com/puppipay/workingdashwallet/blob/master/src/app/providers/puppipay.dash.service.ts
 
 ``` bash
  createtransaction(utxo, privatekey,changeaddress, toaddress, toamount,fees) {
