@@ -13,6 +13,24 @@
 
 ## Introduction - Blockchain, DASH
 
+DASH is another coin similar to Bitcoin. It uses almost all similar OPCODES as Bitcoin. The libraries are also similar.
+
+The libraries that come with DASH has functions to perform send, receive DASH on Blockchain.
+
+DASH is controlled by https://www.dashcentral.org/
+
+The main difference between DASH and Bitcoin is
+
+- In DASH Masternode owners get 50% of mining fees. This is not there is Bitcoin
+- To be a Master node owner you need to deposit 1000 DASH as escrow
+- The master node owners get to vote for Budget proposals https://www.dashcentral.org/budget
+- 10% of master node income is kept for Budget proposals
+- This makes 51% attack unlikely in DASH.
+- There is a strong community for DASH, which is absent in Bitcoin.
+
+
+## Technical DASH
+
 Using EC algorithm, a random  private-key, public-key is created. 
 
 Wallet import format(WIF) is created from private-key. WIF is created as it is easy to store/restore.
@@ -23,13 +41,11 @@ DASH address is created from public-key.
 
 Private-key is used to sign any transactions sent from a address.
 
-
 While storing a wallet in mobile app, we store WIF. 
 
-Topics needed to continue are 
+## Topics of interest
 
 - DASH address
-
 
 Example to create random address
 
