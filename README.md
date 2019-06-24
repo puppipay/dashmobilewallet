@@ -11,14 +11,16 @@
  https://github.com/puppipay/workingdashwallet/
 
 
-## Introduction - Blockchain, Bitcoin, DASH
+## Introduction - Blockchain, DASH
 
 Using EC algorithm, a random  private-key, public-key is created. 
 
 Wallet import format(WIF) is created from private-key. WIF is created as it is easy to store/restore.
+
 Refer WIF: https://en.bitcoin.it/wiki/Wallet_import_format
 
 DASH address is created from public-key.
+
 Private-key is used to sign any transactions sent from a address.
 
 
@@ -40,21 +42,21 @@ Functions used to create address
 
 - DASH wallet
 
-A wallet means just storing a WIF. Then using it any time to get address or private-key from that.
+A wallet means storing a WIF and being able to restore them when needed. Using WIF any time you can get address or private-key.
 
 Getting a address from WIF
 
-https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#import-an-address-via-wif
+-- https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#import-an-address-via-wif
 
 
 Create, Save, Restore Private-key from WIF
 
-https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#create-and-save-a-private-key
+-- https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#create-and-save-a-private-key
 
 
 - DASH WIF
 
-https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#create-and-save-a-private-key
+-- https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#create-and-save-a-private-key
 
 ## Setup to get DASH javascript library
 
@@ -62,7 +64,12 @@ The DASH javascript library need to be obtained from https://github.com/dashevo/
 
 You have to create your own browser library. For that do the following
 
-- clone https://github.com/dashevo/dashcore-lib
+- Get DASH library
+
+``` bash
+clone https://github.com/dashevo/dashcore-lib
+
+```
 
 - npm install (in cloned directory)
 
@@ -84,24 +91,41 @@ https://ionicframework.com/docs/installation/cli
 
 Run command
 
+``` bash
 npm install -g ionic
+
+```
 
 - Create dashwallet tabs app
 
-Run "ionic start dashwallet tabs"
+Run command
 
+``` bash
+ionic start dashwallet tabs
+
+```
+
+Install storage library
+
+``` bash
  npm install @ionic/storage --save
 
+```
 - Add storage and http module to ionic application
 
+``` bash
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 
+```
+
 - Add import entry for ionic application
 
+``` bash
  HttpModule,
  IonicStorageModule.forRoot(),
 
+```
 
 - Copy dashcore library to appropriate place
 
@@ -109,9 +133,11 @@ Copy dashcore-lib.min.js  to  dist/dashcore-lib.min.js
 
 In index.html add
 
+``` bash
  <script src='dist/dashcore-lib.min.js' type="text/javascript"></script>
 
 
+```
 
 
 
