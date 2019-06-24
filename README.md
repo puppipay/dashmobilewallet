@@ -16,15 +16,17 @@ Private-key is used to sign any transactions sent from a address.
 While storing a wallet in mobile app, we store WIF. 
 
 Topics needed to continue are 
+
 - DASH address
 
 
 Example to create random address
 
-https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#generate-a-random-address
+-- https://github.com/dashevo/dashcore-lib/blob/master/docs/examples.md#generate-a-random-address
 
 Functions used to create address
-https://github.com/dashevo/dashcore-lib/blob/master/docs/address.md
+
+-- https://github.com/dashevo/dashcore-lib/blob/master/docs/address.md
 
 
 - DASH wallet
@@ -85,34 +87,223 @@ It has 3 tabs,
 - Transactions
 - Settings (wallet create, set wallet)
 
-## Get some testcoins
+## Get some DASH testcoins
 
-Check the balance
+``` bash
+It can be loaded from one of the link below
+
+
+http://test.faucet.masternode.io/
+http://faucet.test.dash.crowdnode.io/
+
+```
+
+## Verifying DASH testnet address has balance 
+
+``` bash
+In below link replace the address with your DASH testnet address
+
+https://testnet-insight.dashevo.org/insight-api/addr/92wN1HFM2qmarbxwN25EeeTC4iiF1dZzcx
+
+
+```
 
 ## Test by sending/receiving
 
 ## Assorted ionic code snippets
+
+- WIF to address
+
+``` bash
+wiftoaddress() {
+
+  this.walletaddress = dashcore.PrivateKey.fromWIF(this.walletwif ).toAddress(dashcore.Networks.testnet).toString();
+
+}
+
+```
+
 - Save wallet WIF
+
+``` bash
+savewif() {
+
+   this.wiftoaddress() ;
+   this.storage.set('walletwif', this.walletwif);
+
+}
+
+```
+
+- Load wallet WIF
+
+``` bash
+loadwalletwif() {
+     this.storage.get('walletwif').then(data=> {
+        if(data) {
+      this.walletwif = data;
+      this.wiftoaddress() ;
+      this.gettestnetbalance() ;
+        }
+     });
+}
+
+
+```
+
 - Read wallet address
 
-## Assorted DASH code snippets
+## Assorted DASH code snippets needed
 
 - Create wallet WIF
+
+``` bash
+ var privateKey = new dashcore.PrivateKey();
+  this.walletwif = privateKey.toWIF();
+
+```
+
 - Get wallet address from WIF
+
+``` bash
+  this.walletaddress = dashcore.PrivateKey.fromWIF(this.walletwif ).toAddress(dashcore.Networks.testnet).toString();
+
+```
 - Get PrivateKey from WIF
+
+``` bash
+ privatekey =  dashcore.PrivateKey.fromWIF(this.walletwif );
+
+```
+
 - Do Transaction 
 
+``` bash
+  var tx = new dashcore.Transaction()
+      .from(utxo)
+      .to([{address: toaddress, satoshis: toamount}])
+      .fee(fees)
+      .change(changeaddress)
+      .sign(privatekey);
+
+
+```
 
 ## Understanding DASH libraries 
 
 - Look at the organization 
+
+https://github.com/dashevo/dashcore-lib/blob/master/index.js
+
 - See how to access PrivateKey
-- See how to access Address
+
+Observe Privatekey library is exported as below
+
+bitcore.PrivateKey = require('./lib/privatekey');
+
+So when PrivateKey functionality has to be accessed, it is done as below
+
+dashcore.PrivateKey.fromWIF(...)
+
 - See how to access Transaction
+
+Observe Transaction library is exported as below
+
+bitcore.Transaction = require('./lib/transaction');
+
+Similarly Transaction is accessed as
+
+var tx = new dashcore.Transaction()...
+
+
 
 ## REST api to query DASH blockchain
 
 - Example to get balance in DASH address
+
+Refer: source provided
+
+``` bash
+getBalance(address: string, network: string): any {
+
+     var url ;
+
+     if(network == 'testnet') {
+        url = 'https://testnet-insight.dashevo.org/insight-api/addr/';
+     }
+     else {
+        url = 'https://insight.dashevo.org/insight-api/addr/';
+     }
+
+     return new Promise((resolve, reject) => {
+
+
+     this.http.get(url+address).subscribe(res => {
+                let data = res.json();
+                resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+
+  }
+
+
+```
+
 - Example to get utxo
 
+Refer: source provided
 
+``` bash
+  getUtxo(address: string, network: string): any {
+
+     var url ;
+
+     if(network == 'testnet') {
+        url = 'https://testnet-insight.dashevo.org/insight-api/addr/';
+     }
+     else {
+        url = 'https://insight.dashevo.org/insight-api/addr/';
+     }
+
+     return new Promise((resolve, reject) => {
+
+
+     this.http.get(url+address+"/utxo").subscribe(res => {
+                let data = res.json();
+                resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+
+  }
+
+
+```
+
+
+- Example to build transaction
+
+Refer: source provided
+
+``` bash
+ createtransaction(utxo, privatekey,changeaddress, toaddress, toamount,fees) {
+
+  var tx = new dashcore.Transaction()
+      .from(utxo)
+      .to([{address: toaddress, satoshis: toamount}])
+      .fee(fees)
+      .change(changeaddress)
+      .sign(privatekey);
+
+  var txobject = tx.toBuffer();
+
+   return txobject;
+ }
+
+
+```
