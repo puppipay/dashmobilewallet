@@ -1,3 +1,28 @@
+
+
+ npm install @ionic/storage --save
+
+Add storage ans http module
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpModule } from '@angular/http';
+
+Add import entry
+ HttpModule,
+ IonicStorageModule.forRoot(),
+
+
+
+Copy dashcore-lib.min.js  to  dist/dashcore-lib.min.js
+
+In index.html add
+ <script src='dist/dashcore-lib.min.js' type="text/javascript"></script>
+
+Copy puppipay.dash.service.ts
+
+Replace content in tab1.page.html
+
+In tab1.page.ts create logic for send, check balance
+
 # Create your own DASH wallet in Ionic 4
 
 - Video to be added
