@@ -151,8 +151,8 @@ It has 3 tabs,
 
 ## Get some DASH testcoins
 
-``` bash
 It can be loaded from one of the link below
+``` bash
 
 
 http://test.faucet.masternode.io/
@@ -162,8 +162,9 @@ http://faucet.test.dash.crowdnode.io/
 
 ## Verifying DASH testnet address has balance 
 
-``` bash
 In below link replace the address with your DASH testnet address
+
+``` bash
 
 https://testnet-insight.dashevo.org/insight-api/addr/92wN1HFM2qmarbxwN25EeeTC4iiF1dZzcx
 
