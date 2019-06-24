@@ -398,3 +398,42 @@ Refer: source provided https://github.com/puppipay/workingdashwallet/blob/master
 
 
 ```
+
+- Example to broadcast a transaction
+
+Refer: source provided https://github.com/puppipay/workingdashwallet/blob/master/src/app/providers/puppipay.dash.service.ts
+
+``` bash
+
+ broadcast( tx) {
+
+   var pushtx = {
+    rawtx: tx
+   };
+
+
+   var lurl = 'https://testnet-insight.dashevo.org/insight-api/tx/send';
+
+   return new Promise((resolve, reject) => {
+
+
+             let headers = new Headers();
+
+             headers.append('Content-Type', 'application/json');
+
+            this.http.post(lurl, JSON.stringify(pushtx), {headers: headers})
+              .subscribe(res => {
+
+                let data = res.json();
+                resolve(data);
+
+              }, (err) => {
+                reject(err);
+              });
+
+        });
+
+  }
+
+
+```
